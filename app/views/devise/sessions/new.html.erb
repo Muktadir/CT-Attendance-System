@@ -4,7 +4,7 @@
       <%= image_tag "ct_logo.png", :style => "margin:8% 0 0 5%" %>
       <b style="margin-left: 6%; font-size: 16px"><%= Time.now.strftime("%A, %d %B %Y") %></b>
     </div>
-    <div class="span9"></div>
+    <div class="span9">you are accessing this site using IP: <%= request.remote_ip %></div>
   </div>
   <hr>
   <div class="row-fluid">
