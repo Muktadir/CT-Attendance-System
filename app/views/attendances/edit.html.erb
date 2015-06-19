@@ -1,0 +1,50 @@
+<h1>Editing attendance</h1>
+
+<%= form_for(@attendance) do |f| %>
+    <% if @attendance.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@attendance.errors.count, "error") %> prohibited this attendance from being saved:</h2>
+
+          <ul>
+            <% @attendance.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.text_field :firstname, :readonly => true %>
+    </div>
+    <div class="field">
+      <%= f.text_field :lastname, :readonly => true %>
+    </div>
+    <div class="field">
+      <%= f.text_field :email, :readonly => true %>
+    </div>
+    <div class="field">
+      <%= f.text_field :date, :readonly => true %>
+    </div>
+    <div class="field">
+      <%= f.time_select :login_at %>
+    </div>
+    <div class="field">
+      <%= f.time_select :logout_at %>
+    </div>
+    <div class="field">
+      <%= f.hidden_field :present, :value => true %>
+    </div>
+    <div class="field">
+      <%= f.hidden_field :leave, :value => false %>
+    </div>
+    <div class="field">
+      <%= f.hidden_field :leave_cause %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Update" %>
+    </div>
+<% end %>
+
+
+<%= link_to 'Show', @attendance %> |
+<%= link_to 'Back', attendances_path %>

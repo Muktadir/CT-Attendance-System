@@ -1,0 +1,67 @@
+<div>
+  <div class="row-fluid">
+    <div class="span3">
+      <%= image_tag "ct_logo.png", :style => "margin:8% 0 0 5%" %>
+      <b style="margin-left: 6%; font-size: 16px"><%= Time.now.strftime("%A, %d %B %Y") %></b>
+    </div>
+    <div class="span9"></div>
+  </div>
+  <hr>
+  <div class="row-fluid">
+    <div class="span3"></div>
+    <div class="span6" style="text-align: center">
+      <h3>Hey <%= current_employee.firstname %>, Good Morning. Have a Good day!!! :)</h3>
+      <%= form_for(@attendance, url: create_leave_attendance_path({ id: @employee.to_param })) do |f| %>
+          <% if @attendance.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@attendance.errors.count, "error") %> prohibited this attendance from being saved:</h2>
+
+                <ul>
+                  <% @attendance.errors.full_messages.each do |msg| %>
+                      <li><%= msg %></li>
+                  <% end %>
+                </ul>
+              </div>
+          <% end %>
+
+              <div class="field">
+                <%= f.text_field :firstname, :value => @employee.firstname, :readonly => true %>
+              </div>
+              <div class="field">
+                <%= f.text_field :lastname, :value => @employee.lastname, :readonly => true %>
+              </div>
+              <div class="field">
+                <%= f.text_field :email, :value => @employee.email, :readonly => true %>
+              </div>
+              <div class="field">
+                <% date = Time.now.strftime("%d %B %Y").to_s %>
+                <%= f.hidden_field :date, :value => date %>
+              </div>
+              <div class="field">
+                <%= f.hidden_field :login_at %>
+              </div>
+              <div class="field">
+                <%= f.hidden_field :logout_at %>
+              </div>
+              <div class="field">
+                <%= f.hidden_field :present, :value => false %>
+              </div>
+              <div class="field">
+                <%= f.hidden_field :leave, :value => true %>
+              </div>
+              <div class="field">
+                <%= f.text_field :leave_cause %>
+              </div>
+              <div class="actions">
+                <%= f.submit "Check in", :class => "btn btn-default"%>
+              </div>
+      <% end %>
+
+    </div>
+    <div class="span3"></div>
+  </div>
+</div>
+
+
+
+

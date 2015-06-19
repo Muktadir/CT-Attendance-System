@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Firstname:</strong>
+  <%= @attendance.firstname %>
+</p>
+
+<p>
+  <strong>Lastname:</strong>
+  <%= @attendance.lastname %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @attendance.date %>
+</p>
+
+<p>
+  <strong>Login at:</strong>
+  <%= @attendance.login_at %>
+</p>
+
+<p>
+  <strong>Logout at:</strong>
+  <%= @attendance.logout_at %>
+</p>
+
+<p>
+  <strong>Present:</strong>
+  <%= @attendance.present %>
+</p>
+
+<p>
+  <strong>Leave:</strong>
+  <%= @attendance.leave %>
+</p>
+
+<p>
+  <strong>Leave cause:</strong>
+  <%= @attendance.leave_cause %>
+</p>
+
+<p>
+  <strong>Working hours:</strong>
+  <%= @attendance.working_hours %>
+</p>
+
+<%= link_to 'Edit', edit_attendance_path(@attendance) %> |
+<%= link_to 'Back', attendances_path %>

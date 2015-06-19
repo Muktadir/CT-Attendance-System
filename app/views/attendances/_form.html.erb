@@ -1,0 +1,45 @@
+<%= form_for(@attendance) do |f| %>
+    <% if @attendance.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@attendance.errors.count, "error") %> prohibited this attendance from being saved:</h2>
+
+          <ul>
+            <% @attendance.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.hidden_field :firstname, :value => current_employee.firstname %>
+    </div>
+    <div class="field">
+      <%= f.hidden_field :lastname, :value => current_employee.lastname %>
+    </div>
+    <div class="field">
+      <%= f.hidden_field :email, :value => current_employee.email %>
+    </div>
+    <div class="field">
+      <% date = Time.now.strftime("%d %B %Y").to_s %>
+      <%= f.hidden_field :date, :value => date %>
+    </div>
+    <div class="field">
+      <%= f.hidden_field :login_at, :value => Time.now %>
+    </div>
+    <div class="field">
+      <%= f.hidden_field :logout_at %>
+    </div>
+    <div class="field">
+      <%= f.hidden_field :present, :value => true %>
+    </div>
+    <div class="field">
+      <%= f.hidden_field :leave, :value => false %>
+    </div>
+    <div class="field">
+      <%= f.hidden_field :leave_cause %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Check in", :class => "btn btn-default"%>
+    </div>
+<% end %>

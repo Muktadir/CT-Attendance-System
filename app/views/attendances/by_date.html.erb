@@ -1,0 +1,71 @@
+<div>
+  <div class="row-fluid">
+    <div class="span3">
+      <%= image_tag "ct_logo.png", :style => "margin:8% 0 0 5%" %>
+      <b style="margin-left: 6%; font-size: 16px"><%= Time.now.strftime("%A, %d %B %Y") %></b>
+    </div>
+
+    <div class="span7" style="margin-top: 1%">
+      <div class="row-fluid" style="display: inline-flex">
+        <div class="span2"><%= link_to "Home", root_path, :class => "btn btn-default", :style => "margin-left:15%" %></div>
+        <div class="span8>">
+
+        </div>
+        <div class="span2"></div>
+      </div>
+    </div>
+    <div class="span2">
+      Welcome, <b><%= current_employee.firstname %> <%= current_employee.lastname %></b>
+      <%= link_to "signout", destroy_employee_session_path, :method => :delete %>
+    </div>
+  </div>
+  <hr>
+  <div class="row-fluid">
+    <div class="span4"></div>
+    <div class="span5">
+      <%= form_tag({:controller => :attendances, :action => :by_date}, :method => "get") do %>
+          <p><b>From</b></p>
+          <%= date_select "start_date", nil%>
+          <p><b>To</b></p>
+          <%= date_select "end_date", nil %>
+          <br><br>
+          <%= submit_tag "Search",:class => "btn btn-default", :style => "margin-top:-1.5%; width:65%" %>
+      <% end %>
+    </div>
+    <div class="span3"></div>
+  </div>
+  <br>
+  <div class="row-fluid">
+    <div class="span2"><b>Firstname</b></div>
+    <div class="span2"><b>Lastname</b></div>
+    <div class="span2"><b>Date</b></div>
+    <div class="span2"><b>Checked in at</b></div>
+    <div class="span2"><b>Checked out at</b></div>
+    <div class="span2"><b>Worked Hours</b></div>
+  </div>
+</div>
+<% @report_by_name.each do |n| %>
+    <div class="row-fluid">
+      <div class="span2"><%= n.firstname %></div>
+      <div class="span2"><%= n.lastname %></div>
+      <div class="span2"><%= n.date %></div>
+      <div class="span2">
+        <% if n.login_at.present? %>
+            <%= n.login_at.strftime("%H:%M") %>
+        <% elsif n.leave %>
+            was on <%= n.leave_cause %>
+        <% end %>
+      </div>
+      <% if n.logout_at != nil %>
+          <div class="span2"><%= n.logout_at.strftime("%H:%M") %></div>
+          <% @hour = ((n.logout_at - n.login_at)/1.hours).floor %>
+          <% @min = (((n.logout_at - n.login_at)%1.hours)/1.minutes).ceil %>
+          <div class="span2"><%= @hour %> hours and <%= @min %> minutes</div>
+      <% else %>
+          <div class="span2"></div>
+          <div class="span2"></div>
+      <% end %>
+
+    </div>
+
+<% end %>
